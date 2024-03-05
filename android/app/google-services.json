@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "635448982915",
+    "project_id": "asadeproject-b4de2",
+    "storage_bucket": "asadeproject-b4de2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635448982915:android:74f03b3122c4ff30c98ab6",
+        "android_client_info": {
+          "package_name": "com.example.asadeproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2qZvWeAV--TYelg2lOlkOx8sSaegfuLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
