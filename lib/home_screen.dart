@@ -78,14 +78,14 @@ class _MyHomeState extends State<MyHome> {
                           DropdownButton<String>(
                             value: otherCurrency,
                             onChanged: (newValue) {
-                              setState(() async{
+                              setState(() {
                                 otherCurrency = newValue!;
                                 Map<String, dynamic> currencyHistory = {
                                   "baseCurrency" : baseCurrency,
                                   "convertCurrency" : otherCurrency,
                                   "value" : "$value"
                                 };
-                                await FirebaseFirestore.instance.collection("History").add(currencyHistory);
+                                FirebaseFirestore.instance.collection("History").add(currencyHistory);
                               });
                             },
                             items: dropdownItems1.map((item) {
@@ -108,7 +108,9 @@ class _MyHomeState extends State<MyHome> {
                     GestureDetector(
                         onTap: (){
                           showModalBottomSheet(context: context, builder: (context) {
-                            return BottomSheet(onClosing: (){}, builder: (context) {
+                            return BottomSheet(
+                              enableDrag: true,
+                              onClosing: (){}, builder: (context) {
                               return StreamBuilder(
                                   stream: FirebaseFirestore.instance.collection("History").snapshots(),
                                   builder: (BuildContext context,
@@ -120,11 +122,11 @@ class _MyHomeState extends State<MyHome> {
                                         scrollDirection: Axis.vertical,
                                         physics: const ScrollPhysics(),
                                         itemBuilder: (context, index) {
-                                        return ListTile(
-                                          title: Text("${snapshot.data!.docs[index]["baseCurrency"]} - ${snapshot.data!.docs[index]["convertCurrency"]}"),
-                                          subtitle: Text("${snapshot.data!.docs[index]["value"]}"),
-                                        );
-                                      },);
+                                          return ListTile(
+                                            title: Text("${snapshot.data!.docs[index]['baseCurrency']} - ${snapshot.data!.docs[index]['convertCurrency']}"),
+                                            subtitle: Text("${snapshot.data!.docs[index]['value']}"),
+                                          );
+                                        },);
                                     } else if (snapshot.hasError) {
                                       return const Icon(Icons.error_outline);
                                     } else {
@@ -141,7 +143,7 @@ class _MyHomeState extends State<MyHome> {
             } else if (snapshot.hasError) {
               return const Center(child: Icon(Icons.error_outline));
             } else {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             }
           }),
     );
